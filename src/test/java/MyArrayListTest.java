@@ -111,4 +111,15 @@ public class MyArrayListTest {
         System.out.print("Success!");
         System.out.println();
     }
+
+    @Test
+    void shouldQuickSort(){
+        MyArrayList<Integer> listQuickSort = new MyArrayList<>();
+        listQuickSort.add(5);
+        listQuickSort.add(12);
+        listQuickSort.add(4);
+        listQuickSort.add(1);
+        listQuickSort.add(6);
+        listQuickSort.quickSort(Comparator.naturalOrder());
+    }
 }

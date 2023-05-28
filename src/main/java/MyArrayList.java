@@ -15,19 +15,41 @@ public class MyArrayList<E> implements List<E> {
     public MyArrayList(List<E> asList) {
     }
 
+    /**
+     *Adds the specified element to the end of this list.
+     * Lists that support this operation may impose restrictions on what elements can be added to the list.
+     * You must specify which objects or data types should be included in the list.
+     * Initially, the size of the list is 16, when filled, it increases by another 16.
+     * @param e element whose presence in this collection is to be ensured
+     * @return will return true if the value was added successfully
+     */
     @Override
     public boolean add(E e) {
+
         if(size == array.length){
              grow(array.length + 1);
         }
         array[size++] = e;
-        return true;
+        Object added = array[size];
+        return added != null;
     }
 
+    /**
+     * Finds an element from an array by index
+     * @param index index of the element to return
+     * @return the value you are looking for
+     */
     @Override
     public E get(int index) {
         return (E) array[index];
     }
+
+    /**
+     *Removes, by index, the specified array element, if present.
+     * Copies the remaining values into a new array, decreasing the length by one and preserving the order
+     * @param index the index of the element to be removed
+     * @return removed value from array
+     */
     @Override
     public E remove(int index) {
         Object deleted = array[index];
@@ -43,6 +65,13 @@ public class MyArrayList<E> implements List<E> {
         return (E) deleted;
     }
 
+    /**
+     *Removes the first occurrence of the specified element from this list, starting at the end if present.
+     * If this list does not contain an element, it remains unchanged. Removes the element with the highest index i like this.
+     * Copies the remaining values into a new array, decreasing the length by one and preserving the order
+     * @param o element to be removed from this list, if present
+     * @return true if this list contains the specified element
+     */
     @Override
     public boolean remove(Object o) {
         boolean deleted = false;
@@ -58,7 +87,8 @@ public class MyArrayList<E> implements List<E> {
     }
 
     /**
-     *
+     *Performs a sort using the supplied comparator.
+     * Overwrites array values with sorted ones.
      * @param c the {@code Comparator} used to compare list elements.
      *          A {@code null} value indicates that the elements'
      *          {@linkplain Comparable natural ordering} should be used
@@ -69,6 +99,12 @@ public class MyArrayList<E> implements List<E> {
         Arrays.sort(tempoArr,c);
         array = tempoArr;
     }
+
+    /**
+     * Removes all values in the list and reduces the length of the array by the number of removals.
+     * @param c collection containing elements to be removed from this list
+     * @return will return true if the count of the number of values removed is equal to or greater than the length of the list.
+     */
     @Override
     public boolean removeAll(Collection c) {
         int deleted = 0;
@@ -83,6 +119,11 @@ public class MyArrayList<E> implements List<E> {
         return deleted >= c.size();
     }
 
+    /**
+     * Performs a quick sort using the supplied comparator.
+     * Overwrites array values with sorted ones.
+     * @param c the {@code Comparator} used to compare list elements
+     */
     public void quickSort(Comparator<E> c) {
         E[] tempoArr = (E[]) Arrays.copyOf(array,size);
         array = quickSort(tempoArr,c);

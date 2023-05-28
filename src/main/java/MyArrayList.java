@@ -83,7 +83,56 @@ public class MyArrayList<E> implements List<E> {
         return deleted >= c.size();
     }
 
+    public void quickSort(Comparator<E> c) {
+        E[] tempoArr = (E[]) Arrays.copyOf(array,size);
+        array = quickSort(tempoArr,c);
+    }
+    private E[] quickSort(E[] e, Comparator<E> c ){
+
+        if ( e.length == 0){
+            return null;
+        }
+        if(e.length == 1){
+            return e;
+        }
+
+        int low = 0;
+        int high = e.length - 1;
+        int middle = low + (high - low) / 2;
+        E opora = e[middle];
+        int i = low, j = high;
+        while (i <= j) {
+            while (c.compare(e[i], opora) <= 0 ) {
+                i++;
+            }
+            while (c.compare(e[j], opora) >= 0) {
+                j--;
+            }
+            if (i <= j) {
+                E temp = e[i];
+                e[i] = e[j];
+                e[j] = temp;
+                i++;
+                j--;
+            }
+        }
+        E[] left = (E[]) new Object[]{};
+        E[] right = (E[]) new Object[]{};
+        if (low < j) {
+            left = quickSort(Arrays.copyOfRange (e, low, j),c);
+        }
+        if (high > i) {
+            right = quickSort(Arrays.copyOfRange (e, i, high),c);
+        }
+        E[] result = (E[]) new Object[left.length + right.length + 1];
+        System.arraycopy(left, 0, result,0 , left.length);
+        result[left.length] = opora;
+        System.arraycopy(right,0, result,left.length + 1,right.length);
+        return result;
+    }
+
     /////////////////////////////////////////////
+
     @Override
     public int size() {
         return size;

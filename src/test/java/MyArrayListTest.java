@@ -121,5 +121,10 @@ public class MyArrayListTest {
         listQuickSort.add(1);
         listQuickSort.add(6);
         listQuickSort.quickSort(Comparator.naturalOrder());
+        Assertions.assertEquals(1,listQuickSort.get(0));
+        Assertions.assertEquals(4,listQuickSort.get(1));
+        Assertions.assertEquals(5,listQuickSort.get(2));
+        Assertions.assertEquals(6,listQuickSort.get(3));
+        Assertions.assertEquals(12,listQuickSort.get(4));
     }
 }

@@ -122,54 +122,40 @@ public class MyArrayList<E> implements List<E> {
     /**
      * Performs a quick sort using the supplied comparator.
      * Overwrites array values with sorted ones.
+     *
      * @param c the {@code Comparator} used to compare list elements
      */
     public void quickSort(Comparator<E> c) {
-        E[] tempoArr = (E[]) Arrays.copyOf(array,size);
-        array = quickSort(tempoArr,c);
+        quickSort(array, c, 0, size - 1);
     }
-    private E[] quickSort(E[] e, Comparator<E> c ){
 
-        if ( e.length == 0){
-            return null;
+    private void quickSort(Object[] arr, Comparator<E> c, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(arr, c, low, high);
+            quickSort(arr, c, low, pivotIndex - 1);
+            quickSort(arr, c, pivotIndex + 1, high);
         }
-        if(e.length == 1){
-            return e;
+    }
+
+    private int partition(Object[] arr, Comparator<E> c, int low, int high) {
+        E pivot = (E) arr[high];
+        int i = low - 1;
+
+        for (int j = low; j <= high - 1; j++) {
+            if (c.compare((E) arr[j], pivot) <= 0) {
+                i++;
+                swap(arr, i, j);
+            }
         }
 
-        int low = 0;
-        int high = e.length - 1;
-        int middle = low + (high - low) / 2;
-        E opora = e[middle];
-        int i = low, j = high;
-        while (i <= j) {
-            while (c.compare(e[i], opora) <= 0 ) {
-                i++;
-            }
-            while (c.compare(e[j], opora) >= 0) {
-                j--;
-            }
-            if (i <= j) {
-                E temp = e[i];
-                e[i] = e[j];
-                e[j] = temp;
-                i++;
-                j--;
-            }
-        }
-        E[] left = (E[]) new Object[]{};
-        E[] right = (E[]) new Object[]{};
-        if (low < j) {
-            left = quickSort(Arrays.copyOfRange (e, low, j),c);
-        }
-        if (high > i) {
-            right = quickSort(Arrays.copyOfRange (e, i, high),c);
-        }
-        E[] result = (E[]) new Object[left.length + right.length + 1];
-        System.arraycopy(left, 0, result,0 , left.length);
-        result[left.length] = opora;
-        System.arraycopy(right,0, result,left.length + 1,right.length);
-        return result;
+        swap(arr, i + 1, high);
+        return i + 1;
+    }
+
+    private void swap(Object[] arr, int i, int j) {
+        Object temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
     /////////////////////////////////////////////

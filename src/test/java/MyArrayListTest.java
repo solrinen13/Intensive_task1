@@ -31,8 +31,8 @@ public class MyArrayListTest {
     }
 
     @Test
-    void shouldAdd() {
-        System.out.println("Testing add method...");
+    void addAndGet_MethodProof() {
+        System.out.println("Testing add and get methods...");
         Assertions.assertEquals("Apple",list.get(0));
         Assertions.assertEquals("Banana",list.get(1));
         Assertions.assertEquals("Orange",list.get(2));
@@ -41,18 +41,17 @@ public class MyArrayListTest {
     }
 
     @Test
-    void shouldGet() {
+    void shouldGet_WhenValueIsNull() {
         System.out.println("Testing get method...");
-        Assertions.assertEquals("Apple",list.get(0));
-        Assertions.assertEquals("Banana",list.get(1));
-        Assertions.assertEquals("Orange",list.get(2));
+        Assertions.assertNull(list.get(5));
         Assertions.assertNull(list.get(3));
+        Assertions.assertNull(list.get(4));
         System.out.print("Success!");
         System.out.println();
     }
 
     @Test
-    void shouldRemoveByIndex() {
+    void removeByIndex_MethodProof() {
         System.out.println("Testing remove method...");
         list.remove(0);
         Assertions.assertEquals("Banana",list.get(0));
@@ -62,7 +61,7 @@ public class MyArrayListTest {
         System.out.println();
     }
     @Test
-    void shouldRemoveByObject() {
+    void removeByObject_MethodProof() {
         System.out.println("Testing remove by object method...");
         list2.remove("Orange");
         Assertions.assertEquals("Apple",list2.get(0));
@@ -72,7 +71,7 @@ public class MyArrayListTest {
         System.out.println();
     }
     @Test
-    void shouldSort() {
+    void sort_MethodProof() {
         System.out.println("Testing sort method...");
         List<Integer> listSort = new MyArrayList<>();
         listSort.add(5);
@@ -92,7 +91,7 @@ public class MyArrayListTest {
         System.out.println();
     }
     @Test
-    void shouldRemoveAll(){
+    void removeAll_MethodProof(){
         System.out.println("Testing removeAll method...");
         List<Integer> listRemove = new MyArrayList<>();
         listRemove.add(5);
@@ -113,7 +112,7 @@ public class MyArrayListTest {
     }
 
     @Test
-    void shouldQuickSort(){
+    void quickSort_MethodProof(){
         MyArrayList<Integer> listQuickSort = new MyArrayList<>();
         listQuickSort.add(5);
         listQuickSort.add(12);
